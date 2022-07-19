@@ -1,0 +1,31 @@
+Tokenizers:
+depending on the machine the base path can be:
+"tehr10" : "/home/wrb15144/zenon/fMRI-AI-KB"
+"win10": ""
+"nt" : ""
+The full path to get the tokenizer is : base_path+"/data/tokenizers/t5-num-tokenizer/tokenizer{}.json".format(num_of_training_examples)
+The save path should be the same as the base path
+
+Models:
+depending on the machine the base path can be:
+"tehr10" : "/vol/bulkdata/wrb15144/"
+"win10": ""
+"nt" : ""
+The full path for saving or loading the model should be : "/vol/bulkdata/wrb15144/data/encoder_model/{}/".format(folder_name_decide_by_the_user)
+
+
+Datasets:
+depending on the machine the base path can be:
+"tehr10" : "/vol/bulkdata/wrb15144/"
+"win10": ""
+"nt" : ""
+The base directory for loading the datasets files should be : "/vol/bulkdata/wrb15144/data/tokenized_data/{}/".format(subject)
+4 files needs to be loaded/saved : "training_data_{}.pt".format(indicator), "training_labels_{}.pt".format(indicator), "test_data_{}.pt".format(indicator), "test_labels_{}.pt".format(indicator)
+
+Misc files:
+The sequences for every subject
+depending on the machine the base path can be:
+"tehr10" : "/vol/bulkdata/wrb15144/"
+"win10": ""
+"nt" : ""
+The full path for loading/saving sequencs : base_path+"encoder_data/sequences_{}.json".format(subject)
