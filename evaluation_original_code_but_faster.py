@@ -116,14 +116,13 @@ if __name__ == '__main__':
     parser.add_argument("--home_path", default="/home/wrb15144/zenon/fMRI-AI-KB")
     parser.add_argument("--feature_strategy", default="normal")
     parser.add_argument("--method", default="plain")
-    parser.add_argument("--feature_strategy", default="normal")
     args = parser.parse_args()
     print(args)
     lengths = args.sequence_lengths.split(",")
     for length in lengths:
-        starting_point = 0
+        starting_point = 1
         for layer in range(starting_point,13):
-            f = open(args.home_path+"/data/models_output/{}/evaluations/{}/{}/{}/{}/evaluation_script.sh".format(args.model,args.feature_strategy,args.method,length,layer), "r")
+            f = open(args.home_path+"/data/models_output/{}/evaluations/{}/{}/{}/{}/evaluation_script.sh".format(args.nlp_model,args.feature_strategy,args.method,length,layer), "r")
             lines = f.readlines()
             f.close()
             for line in lines:
