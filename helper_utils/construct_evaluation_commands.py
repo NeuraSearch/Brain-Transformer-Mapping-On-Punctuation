@@ -48,7 +48,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--models", default='bert')
     parser.add_argument("--sequence_lengths",default="4",help='length of context to provide to NLP model (default: 1)')
-    parser.add_argument("--output_dir",default="/media/wrb15144/drives/i/Science/CIS-YASHMOSH/zenonlamprou/neurolinguistics-project/code/fMRI-AI-KB/data/models_output/bert/features/40/",help='directory to save extracted representations to')
     parser.add_argument("--home_path", default="/home/wrb15144/zenon/fMRI-AI-KB")
     parser.add_argument("--feature_strategy", default="normal")
     parser.add_argument("--method", default="plain")
