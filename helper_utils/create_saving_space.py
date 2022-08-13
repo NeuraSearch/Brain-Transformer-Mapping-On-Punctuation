@@ -49,13 +49,10 @@ def create_saving_spaces(base_dir):
         create_save_spaces_for_evaluations(base_dir+"/data/models_output/"+model,layers)
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--home_path",
-                        default="/media/wrb15144/drives/i/Science/CIS-YASHMOSH/zenonlamprou/neurolinguistics-project/code/fMRI-AI-KB")
     parser.add_argument("--sequence_lengths", default="4")
     args = parser.parse_args()
-
     sequence_lengths = args.sequence_lengths.split(",")
     prediction_methods = ["kernel_ridge", "kernel_ridge_svd", "plain", "ridge_sk", "svd"]
     methods = ["normal", "padding_all", "padding_everything", "removing_fixations", "padding_fixations"]
     subjects = ["F", "H", "I", "J", "K", "L", "M", "N"]
-    create_saving_spaces(args.home_path)
+    create_saving_spaces(os.getcwd())
