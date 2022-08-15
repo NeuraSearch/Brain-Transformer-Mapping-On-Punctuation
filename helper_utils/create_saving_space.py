@@ -25,13 +25,13 @@ def create_save_spaces_for_predictions(base_dir):
 def create_save_spaces_for_evaluations(base_dir,layers):
     create_path(base_dir + "/evaluations/")
     for method in methods:
-        create_path(base_dir + "/evaluations/evaluations_{}/".format(method))
+        create_path(base_dir + "/evaluations/{}/".format(method))
         for prediction_method in prediction_methods:
-            create_path(base_dir + "/evaluations/evaluations_{}/{}/".format(method,prediction_method))
+            create_path(base_dir + "/evaluations/{}/{}/".format(method,prediction_method))
             for sequence_length in sequence_lengths:
-                create_path(base_dir + "/evaluations/evaluations_{}/{}/{}/".format(method,prediction_method, sequence_length))
+                create_path(base_dir + "/evaluations/{}/{}/{}/".format(method,prediction_method, sequence_length))
                 for layer in range(layers):
-                    create_path(base_dir + "/evaluations/evaluations_{}/{}/{}/{}/".format(method, prediction_method,
+                    create_path(base_dir + "/evaluations/{}/{}/{}/{}/".format(method, prediction_method,
                                                                                        sequence_length,layer))
 def create_saving_spaces(base_dir):
     if not os.path.exists(base_dir+"/data/"):
@@ -50,6 +50,7 @@ def create_saving_spaces(base_dir):
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--sequence_lengths", default="4")
+    parser.add_argument("--home_path", default=os.getcwd())
     args = parser.parse_args()
     sequence_lengths = args.sequence_lengths.split(",")
     prediction_methods = ["kernel_ridge", "kernel_ridge_svd", "plain", "ridge_sk", "svd"]

@@ -46,11 +46,11 @@ def construct_eval_commands(model,sequence_length,layers,home_path,method,featur
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--models", default='bert')
+    parser.add_argument("--models", default='bert',choices=["bert", "distilbert", "roberta", "albert", "electra"])
     parser.add_argument("--sequence_lengths",default="4",help='length of context to provide to NLP model (default: 1)')
-    parser.add_argument("--home_path", default="/home/wrb15144/zenon/fMRI-AI-KB")
-    parser.add_argument("--feature_strategy", default="normal")
-    parser.add_argument("--method", default="plain")
+    parser.add_argument("--home_path", default=os.getcwd())
+    parser.add_argument("--feature_strategy", default="normal",choices=["normal","padding_all","padding_everything","padding_fixations","removing_fixations"])
+    parser.add_argument("--method", default="plain",choices=["plain","kernel_ridge","kernel_ridge_svd","svd","ridge_sk"])
     args = parser.parse_args()
     print(args)
     models = args.models.split(",")

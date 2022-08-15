@@ -37,7 +37,7 @@ if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--method", default="plain",choices=["plain","kernel_ridge","kernel_ridge_svd","svd","ridge_sk"])
     parser.add_argument("--sequence_lengths", default="4")
-    parser.add_argument("--models", default="bert")
+    parser.add_argument("--models", default="bert", choices=["bert", "distilbert", "roberta", "albert", "electra"])
     parser.add_argument("--feature_strategy", default="normal",choices=["normal","padding_all","padding_everything","padding_fixations","removing_fixations"])
     args = parser.parse_args()
     print(args)
