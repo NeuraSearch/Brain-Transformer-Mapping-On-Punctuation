@@ -120,7 +120,7 @@ if __name__ == '__main__':
     print(args)
     lengths = args.sequence_lengths.split(",")
     for length in lengths:
-        starting_point = 1
+        starting_point = 0
         for layer in range(starting_point,13):
 
             f = open(args.home_path+"/data/models_output/{}/evaluations/{}/{}/{}/{}/evaluation_script.sh".format(args.nlp_model,args.feature_strategy,args.method,length,layer), "r")
