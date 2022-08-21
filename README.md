@@ -3,29 +3,30 @@
 Role of Punctuation in Semantic Mapping between Brain and Transformer Models (Published in ACAIN 2022)
 
 ## Description
+This project has 2 goals. The first goal was to extend the work done by [Toneva and Wehbe](https://dl.acm.org/doi/abs/10.5555/3454287.3455626) on identifying brain
+align models in the domain of Natural Language Processing. The second goal was to determine the role of punctuation and how is processed
+semantically from the human brain.
 
+This README file provides instructions on how to run our code and reproduce our results.
 Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
 
 ## Table of Contents
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
 
 - [Installation](#installation)
 - [Helper Scripts](#helper-scripts)
 - [Experiment functions](#experiment-functions)
-- [Credits](#credits)
-- [License](#license)
 
 ## Installation
 Use the ```pip install -r requirements.txt``` command to install the necessary packages on your virtual environment.
 Use the ```pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113``` to install the necessary torch library.
 Additionally, if you want to install a different distribution of torch visit [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/) and get the instruction for the desired torch distribution.
+
+You can download the already [preprocessed fMRI data here](https://drive.google.com/drive/folders/1Q6zVCAJtKuLOh-zWpkS3lH8LBvHcEOE8?usp=sharing), which are made publicly available from [Toneva and Wehbe](https://dl.acm.org/doi/abs/10.5555/3454287.3455626). 
+This data contains fMRI recordings for 8 subjects reading one chapter of Harry Potter as mentioned in the original README file which can be found under brain_language_nlp directory. 
+The data must be placed on the data directory in order for the code to run. 
 ## Helper Scripts
+
 You can use the 4 helper scripts to construct the saving space for your data and create bash scripts to run the commands for all 3 phases of the experiment.
 ### Creating the save space
 Using the script create_saving_space.py under helper_utils can help you create the save space for all your experiments.
@@ -62,12 +63,4 @@ You can use the script construct_evaluation_commands.py under helper_utils to cr
 
 
 
-## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
-
-## License
