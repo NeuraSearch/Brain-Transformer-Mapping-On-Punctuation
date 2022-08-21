@@ -15,7 +15,7 @@ Provide a short description explaining the what, why, and how of your project. U
 
 - [Installation](#installation)
 - [Helper Scripts](#helper-scripts)
-- [Experiment functions](#experiment-functions)
+- [Using the experiment functions](#experiment-functions)
 
 ## Installation
 Use the ```pip install -r requirements.txt``` command to install the necessary packages on your virtual environment.
@@ -57,10 +57,43 @@ You can use the script construct_evaluation_commands.py under helper_utils to cr
 * **models**: Define for which model you wish to create the bash scripts that contain the evaluation commands.
 * **feature_strategy** : The feature strategy used previously on extracting the features. This parameter is essential to be able to navigate to the correct directory to get the correct prediction files.
 * **method** :  The method to be used by the prediction processed. This parameter is essential to be able to navigate to the correct directory to get the correct prediction files.
+
+Example:
+```python .\helper_utils\construct_evaluation_commands.py --models bert --sequence_lengths 4,5,10,15,20,25,30,35,40 --feature_strategy normal --method plain```
+
+
+## Using the experiment functions
 ### Extracting the features
 ### Making predictions
+Navigate at scripts/{model_name}/{feature_strategy}/{method}/ and find the prediction_commands.sh file. Run the commands the file to make the predictions. 
+
+Example :
+```./scripts/bert/padding_all/kernel_ridge/prediction_commands.sh```
+
+If you wish to find out more on how to construct the prediction commands, please visit the README.md file at ./brain_language_npl/README.md
+
+
 ### Evaluating predictions
+Evaluation can be run using 2 ways. Either running the created evaluation scripts directly or using the evaluation_original_code_but_faster.py script.
 
+The difference is that with the second method and utilizing the Numba library the process is speed up significantly. It is a requirement to create the evaluation script before using both ways.
 
+Example on using the created scripts directly: 
+```
+./data/models_output/{model_name}/evaluations/{feature_strategy/{method}/{sequence_length}/{layer}/evaluation_script.sh
+```
+#### Instructions on using the evaluation_original_code_but_faster.py script
+Example:
+```
+python ./evaluation_original_code_but_faster.py --sequence_lengths 4,5,10,15,20,25,30,25,40 --nlp_model bert --feature_strategy normal --method plain --output_dir ./data
+/models_output/bert/evaluations/normal/plain/4/0/
+```
+Parameters:
+* **sequence_lengths** : Define all the sequence lengths like so : --sequence_lengths 4,5,10,15,20,25,30,25,40. IMPORTANT TO USE THE "," BETWEEN THE LENGTHS SO THE PROGRAM CAN IDENTIFY ALL THE LENGTHS!!!!
+* **nlp_model**: Define for which model you wish evaluate the predictions made from its extracted features.
+* **feature_strategy** : The feature strategy used previously on making predictions. This parameter is essential to be able to navigate to the correct directory to evaluate prediction files.
+* **method** :  The method to be used by the prediction processed. This parameter is essential to be able to evaluate to the correct directory to get the correct prediction files.
+* **home_path** : Defines the base directory of the saving space. By default, is set to be the start of the directory that the scripts are saved on. This is the same in all helper scripts.
+* **output_dir** : Defines the directory where the evaluation files will be saved.
 
 
