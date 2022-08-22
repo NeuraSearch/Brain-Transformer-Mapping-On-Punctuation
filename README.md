@@ -24,7 +24,7 @@ Additionally, if you want to install a different distribution of torch visit [ht
 
 You can download the already [preprocessed fMRI data here](https://drive.google.com/drive/folders/1Q6zVCAJtKuLOh-zWpkS3lH8LBvHcEOE8?usp=sharing), which are made publicly available from [Toneva and Wehbe](https://dl.acm.org/doi/abs/10.5555/3454287.3455626). 
 This data contains fMRI recordings for 8 subjects reading one chapter of Harry Potter as mentioned in the original README file which can be found under brain_language_nlp directory. 
-The data must be placed on the data directory in order for the code to run. 
+The data must be placed on the data directory in order for the code to run. The data directory needs to be created inside the current working project.
 # Helper Scripts
 
 You can use the 4 helper scripts to construct the saving space for your data and create bash scripts to run the commands for all 3 phases of the experiment.
