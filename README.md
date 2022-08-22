@@ -2,10 +2,10 @@
 
 Role of Punctuation in Semantic Mapping between Brain and Transformer Models (Published in ACAIN 2022)
 # Table of Contents
-- [Description](#Description)
-- [Installation](#Installation)
+- [Description](#description)
+- [Installation](#installation)
 - [Helper Scripts](#helper-scripts)
-- [Using the experiment functions](#experiment-functions)
+- [Using the experiment functions](#using-the-experiment-functions)
 # Description
 This project has 2 goals. The first goal was to extend the work done by [Toneva and Wehbe](https://dl.acm.org/doi/abs/10.5555/3454287.3455626) on identifying brain
 align models in the domain of Natural Language Processing. The second goal was to determine the role of punctuation and how is processed
@@ -18,7 +18,6 @@ Click [this](#Installation) link to install the required packages
 
 
 # Installation
-
 Use the ```pip install -r requirements.txt``` command to install the necessary packages on your virtual environment.
 Use the ```pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113``` to install the necessary torch library.
 Additionally, if you want to install a different distribution of torch visit [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/) and get the instruction for the desired torch distribution.
@@ -26,7 +25,7 @@ Additionally, if you want to install a different distribution of torch visit [ht
 You can download the already [preprocessed fMRI data here](https://drive.google.com/drive/folders/1Q6zVCAJtKuLOh-zWpkS3lH8LBvHcEOE8?usp=sharing), which are made publicly available from [Toneva and Wehbe](https://dl.acm.org/doi/abs/10.5555/3454287.3455626). 
 This data contains fMRI recordings for 8 subjects reading one chapter of Harry Potter as mentioned in the original README file which can be found under brain_language_nlp directory. 
 The data must be placed on the data directory in order for the code to run. 
-## Helper Scripts
+# Helper Scripts
 
 You can use the 4 helper scripts to construct the saving space for your data and create bash scripts to run the commands for all 3 phases of the experiment.
 ### Creating the save space
@@ -90,13 +89,13 @@ python .\helper_utils\construct_evaluation_commands.py
 ```
 
 
-## Using the experiment functions
+# Using the experiment functions
 ### Extracting the features
-You can extract the features of the model by first running the constructed bash script for the extraction features. Navigate at data/models_output/{model_name}/features/scripts/{feature_strategy}/ and run the bash script.
+You can extract the features of the model by first running the constructed bash script for the extraction features. Navigate at scripts/{model_name}/features/{feature_strategy}/ and run the bash script.
 
 Example:
 ```bash
-cd data/models_output/bert/features/scripts/padding_all/
+cd scripts/bert/features/scripts/padding_all/
 ./extract_features.sh
 ```
 The other way is to run directly each command one by one.
@@ -141,7 +140,7 @@ The difference is that with the second method and utilizing the Numba library th
 
 Example on using the created scripts directly: 
 ```bash 
-./data/models_output/{model_name}/evaluations/{feature_strategy/{method}/{sequence_length}/{layer}/evaluation_script.sh
+./scripts/{model_name}/evaluations/{feature_strategy/{method}/{sequence_length}/{layer}/evaluation_script.sh
 ```
 #### Instructions on using the evaluation_original_code_but_faster.py script
 Using the example provided bellow you can run the evaluation using the fast script. However, the evaluation scripts needs to be constructed first.

@@ -118,12 +118,13 @@ if __name__ == '__main__':
     parser.add_argument("--method", default="plain",choices=["plain","kernel_ridge","kernel_ridge_svd","svd","ridge_sk"])
     args = parser.parse_args()
     print(args)
+    home_path = args.home_path.replace("\\","/")
     lengths = args.sequence_lengths.split(",")
     for length in lengths:
         starting_point = 0
         for layer in range(starting_point,13):
 
-            f = open(args.home_path+"/data/models_output/{}/evaluations/{}/{}/{}/{}/evaluation_script.sh".format(args.nlp_model,args.feature_strategy,args.method,length,layer), "r")
+            f = open(home_path+"/scripts/{}/evaluations/{}/{}/{}/{}/evaluation_script.sh".format(args.nlp_model,args.feature_strategy,args.method,length,layer), "r")
             lines = f.readlines()
             f.close()
             for line in lines:
@@ -138,6 +139,6 @@ if __name__ == '__main__':
                 print(output_path)
                 print(subject)
 
-                run_evaluations(input_path,output_path,subject,args.home_path,method)
+                run_evaluations(input_path,output_path,subject,home_path,method)
 
 

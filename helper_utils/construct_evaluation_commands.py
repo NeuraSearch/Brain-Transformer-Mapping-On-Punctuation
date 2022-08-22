@@ -1,5 +1,6 @@
 import argparse
 import os
+from pathlib import Path
 
 
 def construct_eval_commands(model,sequence_length,layers,home_path,method,feature_strategy):
@@ -19,7 +20,9 @@ def construct_eval_commands(model,sequence_length,layers,home_path,method,featur
     counter = 0
     while counter < layers:
         print("Saving for layer "+str(counter))
-        save_path_directory = home_path + "/data/models_output/{}/evaluations/{}/{}/{}/{}/".format(model,feature_strategy,method,sequence_length,counter)
+        save_path_directory = home_path + "/scripts/{}/evaluations/{}/{}/{}/{}/".format(model,feature_strategy,method,sequence_length,counter)
+        if not os.path.exists(save_path_directory):
+            Path(save_path_directory).mkdir(parents=True, exist_ok=True)
         print(save_path_directory)
         if not os.path.exists(save_path_directory):
             os.mkdir(save_path_directory)
@@ -27,8 +30,8 @@ def construct_eval_commands(model,sequence_length,layers,home_path,method,featur
         print(save_path)
         file = open(save_path,"w")
         for subject in subjects:
-            output_path = save_path_directory
-            input_path = args.home_path + "/data/models_output/{}/predictions/{}/{}/{}/predict_{}_with_{}_layer_{}_len_{}.npy".format(model,feature_strategy, sequence_length,method,subject,model,counter,sequence_length)
+            output_path = home_path+f"/data/models_output/{model}/evaluations/{feature_strategy}/{method}/{sequence_length}/{counter}/"
+            input_path = home_path + "/data/models_output/{}/predictions/{}/{}/{}/predict_{}_with_{}_layer_{}_len_{}.npy".format(model,feature_strategy, sequence_length,method,subject,model,counter,sequence_length)
             command = "python "+home_path+"/brain_language_nlp/evaluate_brain_predictions.py " \
                       " --subject " + subject + \
                       " --method " + method + \
@@ -53,6 +56,7 @@ if __name__ == '__main__':
     parser.add_argument("--method", default="plain",choices=["plain","kernel_ridge","kernel_ridge_svd","svd","ridge_sk"])
     args = parser.parse_args()
     print(args)
+    home_path = args.home_path.replace("\\", "/")
     models = args.models.split(",")
     sequence_lengths = args.sequence_lengths.split(",")
     for model in models:
@@ -60,4 +64,4 @@ if __name__ == '__main__':
         if model == "distilibert":
             layers = 7
         for sequence_length in sequence_lengths:
-            construct_eval_commands(model, sequence_length, layers, args.home_path, args.method, args.feature_strategy)
+            construct_eval_commands(model, sequence_length, layers, home_path, args.method, args.feature_strategy)

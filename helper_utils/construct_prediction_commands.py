@@ -1,7 +1,9 @@
 import argparse
 import os
+from pathlib import Path
 
-def construct_commands(f,features_path,out_path,sequence_length,feat_type,layers,method):
+
+def construct_commands(f,features_path,out_path,sequence_length,feat_type,layers,method,home_path):
     '''
 
     Args:
@@ -28,6 +30,7 @@ def construct_commands(f,features_path,out_path,sequence_length,feat_type,layers
                       " --layer "+str(counter)+ \
                       " --sequence_length "+str(sequence_length)+ \
                       " --method " + method + \
+                      " --home_path "+home_path+ \
                       " --output_dir "+out_path
             f.write(command)
             f.write("\n")
@@ -41,19 +44,15 @@ if __name__=="__main__":
     parser.add_argument("--feature_strategy", default="normal",choices=["normal","padding_all","padding_everything","padding_fixations","removing_fixations"])
     args = parser.parse_args()
     print(args)
-    home_path = os.getcwd()
+    home_path = os.getcwd().replace("\\","/")
     if not os.path.exists(home_path+"/scripts"):
         os.mkdir(home_path+"/scripts")
     models = args.models.split(",")
     sequence_lengths = args.sequence_lengths.split(",")
     for model in models:
-        save_path = home_path + "/scripts/" + model + "/" + args.feature_strategy + "/" + args.method
-        if not os.path.exists(home_path + "/scripts/"+ model):
-            os.mkdir(home_path + "/scripts/"+ model)
-        if not os.path.exists(home_path + "/scripts/" + model+"/"+args.feature_strategy):
-            os.mkdir(home_path + "/scripts/" + model+"/"+args.feature_strategy)
+        save_path = home_path + "/scripts/" + model + "/predictions/" + args.feature_strategy + "/" + args.method
         if not os.path.exists(save_path):
-            os.mkdir(save_path)
+            Path(save_path).mkdir(parents=True, exist_ok=True)
         save_path += "/prediction_commands.sh"
         f = open(save_path, "w")
         for sequence_length in sequence_lengths:
@@ -66,5 +65,5 @@ if __name__=="__main__":
             layers = 13
             if model == "distilibert":
                 layers = 7
-            construct_commands(f, features_path, out_path, int(sequence_length), model, layers, args.method)
+            construct_commands(f, features_path, out_path, int(sequence_length), model, layers, args.method,home_path)
         f.close()
