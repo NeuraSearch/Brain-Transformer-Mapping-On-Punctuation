@@ -52,7 +52,7 @@ This file creates under the model folder in models_output a bash script file for
 Example : 
 
 ```python
-python .\helper_utils\construct_extraction_features_script.py
+python .\helper_utils\construct_extract_features_script.py
 --sequence_lengths 4,5,10,15,20,25,30,35,40 
 ```
 ### Creating the prediction scripts
