@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 from utils.ELECTRA_Utils import get_electra_layer_representations
 from utils.ALBERT_Utils import get_albert_layer_representations
@@ -17,6 +18,8 @@ import argparse
 
                 
 def save_layer_representations(model_layer_dict, model_name, seq_len, save_dir):
+    if not os.path.exists(save_dir):
+        Path(save_dir).mkdir(parents=True, exist_ok=True)
     for layer in model_layer_dict.keys():
         np.save('{}/{}_length_{}_layer_{}.npy'.format(save_dir,model_name,seq_len,layer+1),np.vstack(model_layer_dict[layer]))  
     print('Saved extracted features to {}'.format(save_dir))

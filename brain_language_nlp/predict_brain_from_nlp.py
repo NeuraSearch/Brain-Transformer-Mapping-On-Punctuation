@@ -1,5 +1,6 @@
 import argparse
 import os
+from pathlib import Path
 
 import numpy as np
 
@@ -35,7 +36,8 @@ if __name__ == '__main__':
     fname = 'predict_{}_with_{}_layer_{}_len_{}'.format(args.subject, args.nlp_feat_type, args.layer, args.sequence_length)
 
     print('saving: {}'.format(overall_output_dir + fname))
-
+    if not os.path.exists(overall_output_dir):
+        Path(overall_output_dir).mkdir(parents=True, exist_ok=True)
     np.save(overall_output_dir + fname + '.npy', {'corrs_t':corrs_t,'preds_t':preds_t,'test_t':test_t})
 
     

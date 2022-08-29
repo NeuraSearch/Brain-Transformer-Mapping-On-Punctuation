@@ -1,5 +1,6 @@
 import argparse
 import os.path
+from pathlib import Path
 
 import numpy as np
 import pickle as pk
@@ -41,7 +42,7 @@ if __name__ == '__main__':
 
     fname = args.output_path+"/"+args.method+"/"
     if not os.path.exists(fname):
-        os.mkdir(fname)
+        Path(fname).mkdir(parents=True, exist_ok=True)
     if n_class < 20:
         fname = fname + '_{}v{}_'.format(n_class,n_class)
 
