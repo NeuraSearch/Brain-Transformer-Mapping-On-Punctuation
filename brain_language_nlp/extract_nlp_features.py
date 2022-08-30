@@ -32,14 +32,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--nlp_model", default='bert', choices=model_options)
     parser.add_argument("--sequence_length", type=int, default=40, help='length of context to provide to NLP model (default: 1)')
-    parser.add_argument("--output_dir",default="/media/wrb15144/drives/i/Science/CIS-YASHMOSH/zenonlamprou/neurolinguistics-project/code/fMRI-AI-KB/data/models_output/bert/features/40/", help='directory to save extracted representations to')
+    parser.add_argument("--output_dir",default="", help='directory to save extracted representations to')
     parser.add_argument("--home_path", default="")
     parser.add_argument("--feature_strategy", default="normal")
     args = parser.parse_args()
     print(args)
+    home_path = args.home_path
     if args.home_path == "":
-        args.home_path = os.getcwd().replace("\\","/")
-    text_array = np.load(args.home_path+'/data/stimuli_words.npy')
+        home_path = os.getcwd().replace("\\","/")
+    text_array = np.load(home_path+'/data/stimuli_words.npy')
     remove_chars = [",","\"","@"]
     
     
@@ -47,7 +48,7 @@ if __name__ == '__main__':
         # the index of the word for which to extract the representations (in the input "[CLS] word_1 ... word_n [SEP]")
         # for CLS, set to 0; for SEP set to -1; for last word set to -2
         word_ind_to_extract = -2
-        nlp_features = get_bert_layer_representations(args.sequence_length, text_array, remove_chars, word_ind_to_extract,args.feature_strategy,args.home_path)
+        nlp_features = get_bert_layer_representations(args.sequence_length, text_array, remove_chars, word_ind_to_extract,args.feature_strategy,home_path)
     elif args.nlp_model == 'albert':
         # the index of the word for which to extract the representations (in the input "[CLS] word_1 ... word_n [SEP]")
         # for CLS, set to 0; for SEP set to -1; for last word set to -2
@@ -73,7 +74,7 @@ if __name__ == '__main__':
         # for CLS, set to 0; for SEP set to -1; for last word set to -2
         word_ind_to_extract = -2
         nlp_features = get_roberta_layer_representations(args.sequence_length, text_array, remove_chars,
-                                                             word_ind_to_extract,args.feature_strategy,args.home_path)
+                                                             word_ind_to_extract,args.feature_strategy,home_path)
     elif args.nlp_model == 'transformer_xl':
         word_ind_to_extract = -1
         nlp_features = get_xl_layer_representations(args.sequence_length, text_array, remove_chars, word_ind_to_extract)

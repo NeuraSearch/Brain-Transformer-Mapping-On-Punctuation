@@ -18,8 +18,9 @@ if __name__ == '__main__':
     parser.add_argument("--method",default="plain")
     args = parser.parse_args()
     print(args)
+    home_path = args.home_path
     if args.home_path == "":
-        args.home_path = os.getcwd().replace("\\","/")
+        home_path = os.getcwd().replace("\\","/")
     predict_feat_dict = {'nlp_feat_type':args.nlp_feat_type,
                          'nlp_feat_dir':args.nlp_feat_dir,
                          'layer':args.layer,
@@ -27,9 +28,9 @@ if __name__ == '__main__':
 
 
     # loading fMRI data
-    print(args.home_path)
-    data = np.load(args.home_path+'/data/fMRI/data_subject_{}.npy'.format(args.subject))
-    corrs_t, _, _, preds_t, test_t = run_class_time_CV_fmri_crossval_ridge(data,predict_feat_dict,args.home_path,args.method)
+    print(home_path)
+    data = np.load(home_path+'/data/fMRI/data_subject_{}.npy'.format(args.subject))
+    corrs_t, _, _, preds_t, test_t = run_class_time_CV_fmri_crossval_ridge(data,predict_feat_dict,home_path,args.method)
 
     overall_output_dir = args.output_dir+"/"+args.method+"/"
     fname = 'predict_{}_with_{}_layer_{}_len_{}'.format(args.subject, args.nlp_feat_type, args.layer, args.sequence_length)

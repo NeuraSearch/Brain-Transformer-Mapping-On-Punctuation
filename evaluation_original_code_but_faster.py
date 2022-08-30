@@ -115,13 +115,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--nlp_model", default='bert',choices=["bert","roberta","albert","distilibert","electra"])
     parser.add_argument("--sequence_lengths",default="4",help='length of context to provide to NLP model (default: 1)')
-    parser.add_argument("--output_dir",default="/media/wrb15144/drives/i/Science/CIS-YASHMOSH/zenonlamprou/neurolinguistics-project/code/fMRI-AI-KB/data/models_output/bert/features/40/",help='directory to save extracted representations to')
+    parser.add_argument("--output_dir",default="",help='directory to save extracted representations to')
     parser.add_argument("--home_path", default=os.getcwd())
     parser.add_argument("--feature_strategy", default="normal",choices=["normal","padding_all","padding_everything","padding_fixations","removing_fixations"])
     parser.add_argument("--method", default="plain",choices=["plain","kernel_ridge","kernel_ridge_svd","svd","ridge_sk"])
     args = parser.parse_args()
     print(args)
-    home_path = args.home_path.replace("\\","/")
+    home_path = args.home_path
+    if args.home_path == "":
+       home_path = os.getcwd().replace("\\","/")
     lengths = args.sequence_lengths.split(",")
     for length in lengths:
         starting_point = 0

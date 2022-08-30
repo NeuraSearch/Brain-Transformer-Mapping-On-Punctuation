@@ -50,10 +50,13 @@ def create_saving_spaces(base_dir):
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--sequence_lengths", default="4")
-    parser.add_argument("--home_path", default=os.getcwd())
+    parser.add_argument("--home_path", default="")
     args = parser.parse_args()
+    home_path = args.home_path
+    if args.home_path == "":
+        home_path = os.getcwd().replace("\\", "/")
     sequence_lengths = args.sequence_lengths.split(",")
     prediction_methods = ["kernel_ridge", "kernel_ridge_svd", "plain", "ridge_sk", "svd"]
     methods = ["normal", "padding_all", "padding_everything", "removing_fixations", "padding_fixations"]
     subjects = ["F", "H", "I", "J", "K", "L", "M", "N"]
-    create_saving_spaces(os.getcwd())
+    create_saving_spaces(home_path)

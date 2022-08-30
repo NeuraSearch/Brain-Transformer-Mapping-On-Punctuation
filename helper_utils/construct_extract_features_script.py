@@ -5,12 +5,14 @@ from pathlib import Path
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--sequence_lengths", default=40)
-    parser.add_argument("--home_path", default=os.getcwd())
+    parser.add_argument("--home_path", default="")
     args = parser.parse_args()
     sequence_lengths = args.sequence_lengths.split(",")
     models = ["bert", "distilbert", "roberta", "albert", "electra"]
     feature_strategies = ["normal", "padding_all", "padding_everything", "padding_fixations", "removing_fixations"]
-    home_path = args.home_path.replace("\\", "/")
+    home_path = args.home_path
+    if args.home_path == "":
+        home_path = os.getcwd().replace("\\", "/")
     for sequence_length in sequence_lengths:
         for model in models:
             for feature_strategy in feature_strategies:

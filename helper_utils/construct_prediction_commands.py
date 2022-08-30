@@ -42,9 +42,12 @@ if __name__=="__main__":
     parser.add_argument("--sequence_lengths", default="4")
     parser.add_argument("--models", default="bert", choices=["bert", "distilbert", "roberta", "albert", "electra"])
     parser.add_argument("--feature_strategy", default="normal",choices=["normal","padding_all","padding_everything","padding_fixations","removing_fixations"])
+    parser.add_argument("--home_path", default="")
     args = parser.parse_args()
     print(args)
-    home_path = os.getcwd().replace("\\","/")
+    home_path = args.home_path
+    if args.home_path == "":
+        home_path = os.getcwd().replace("\\", "/")
     if not os.path.exists(home_path+"/scripts"):
         os.mkdir(home_path+"/scripts")
     models = args.models.split(",")

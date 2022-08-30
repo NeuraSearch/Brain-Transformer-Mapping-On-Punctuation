@@ -51,12 +51,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--models", default='bert',choices=["bert", "distilbert", "roberta", "albert", "electra"])
     parser.add_argument("--sequence_lengths",default="4",help='length of context to provide to NLP model (default: 1)')
-    parser.add_argument("--home_path", default=os.getcwd())
+    parser.add_argument("--home_path", default="")
     parser.add_argument("--feature_strategy", default="normal",choices=["normal","padding_all","padding_everything","padding_fixations","removing_fixations"])
     parser.add_argument("--method", default="plain",choices=["plain","kernel_ridge","kernel_ridge_svd","svd","ridge_sk"])
     args = parser.parse_args()
     print(args)
-    home_path = args.home_path.replace("\\", "/")
+    home_path = args.home_path
+    if args.home_path == "":
+        home_path = os.getcwd().replace("\\", "/")
     models = args.models.split(",")
     sequence_lengths = args.sequence_lengths.split(",")
     for model in models:
