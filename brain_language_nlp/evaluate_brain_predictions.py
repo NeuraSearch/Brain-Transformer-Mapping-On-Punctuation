@@ -1,5 +1,6 @@
 import argparse
 import os.path
+from pathlib import Path
 
 import numpy as np
 import pickle as pk
@@ -13,11 +14,12 @@ if __name__ == '__main__':
     parser.add_argument("--input_path", required=True)
     parser.add_argument("--output_path", required=True)
     parser.add_argument("--subject", default='')
-    parser.add_argument("--home_path",default="/media/wrb15144/drives/i/Science/CIS-YASHMOSH/zenonlamprou/neurolinguistics-project/code/fMRI-AI-KB")
+    parser.add_argument("--home_path",default="")
     parser.add_argument("--method", default="plain")
     args = parser.parse_args()
     print(args)
-
+    if args.home_path == "":
+        args.home_path = os.getcwd().replace("\\","/")
     start_time = tm.time()
 
     loaded = np.load(args.input_path, allow_pickle=True)
@@ -41,7 +43,7 @@ if __name__ == '__main__':
 
     fname = args.output_path+"/"+args.method+"/"
     if not os.path.exists(fname):
-        os.mkdir(fname)
+        Path(fname).mkdir(parents=True, exist_ok=True)
     if n_class < 20:
         fname = fname + '_{}v{}_'.format(n_class,n_class)
 

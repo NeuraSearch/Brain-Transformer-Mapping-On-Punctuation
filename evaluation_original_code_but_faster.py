@@ -1,5 +1,6 @@
 import argparse
 import os
+from pathlib import Path
 
 import numba
 import numpy
@@ -39,7 +40,9 @@ def run_evaluations(input_path,output_path,subject,home_path,method):
         accs[ind_num,:] = np.nanmean(return_acc,0)
         print('Classification for fold done. Took {} seconds'.format(tm.time() - start_time))
 
-    fname = output_path 
+    fname = output_path
+    if not os.path.exists(fname):
+        Path(fname).mkdir(parents=True, exist_ok=True)
     if n_class < 20:
         fname = fname + '_{}v{}_'.format(n_class, n_class)
 

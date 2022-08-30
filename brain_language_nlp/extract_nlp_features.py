@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 from utils.ELECTRA_Utils import get_electra_layer_representations
 from utils.ALBERT_Utils import get_albert_layer_representations
@@ -17,6 +18,8 @@ import argparse
 
                 
 def save_layer_representations(model_layer_dict, model_name, seq_len, save_dir):
+    if not os.path.exists(save_dir):
+        Path(save_dir).mkdir(parents=True, exist_ok=True)
     for layer in model_layer_dict.keys():
         np.save('{}/{}_length_{}_layer_{}.npy'.format(save_dir,model_name,seq_len,layer+1),np.vstack(model_layer_dict[layer]))  
     print('Saved extracted features to {}'.format(save_dir))
@@ -30,10 +33,12 @@ if __name__ == '__main__':
     parser.add_argument("--nlp_model", default='bert', choices=model_options)
     parser.add_argument("--sequence_length", type=int, default=40, help='length of context to provide to NLP model (default: 1)')
     parser.add_argument("--output_dir",default="/media/wrb15144/drives/i/Science/CIS-YASHMOSH/zenonlamprou/neurolinguistics-project/code/fMRI-AI-KB/data/models_output/bert/features/40/", help='directory to save extracted representations to')
-    parser.add_argument("--home_path", default="/home/wrb15144/zenon/fMRI-AI-KB")
+    parser.add_argument("--home_path", default="")
     parser.add_argument("--feature_strategy", default="normal")
     args = parser.parse_args()
     print(args)
+    if args.home_path == "":
+        args.home_path = os.getcwd().replace("\\","/")
     text_array = np.load(args.home_path+'/data/stimuli_words.npy')
     remove_chars = [",","\"","@"]
     
