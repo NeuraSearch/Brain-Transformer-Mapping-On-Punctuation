@@ -33,6 +33,9 @@ Using the script create_saving_space.py under helper_utils can help you create t
 
 It creates all the folders for all the available models mentioned in the paper. The only parameter needs to specified is the --sequence_length parameter.
 
+However the three scripts for extracting the features, making predictions and evaluating predictions will create the saving space automatically when performing their operation.
+
+
 #### Parameters
 * **sequence_lengths** :Define all the sequence lengths like so : --sequence_lengths 4,5,10,15,20,25,30,25,40. IMPORTANT TO USE THE "," BETWEEN THE LENGTHS SO THE PROGRAM CAN IDENTIFY ALL THE LENGTHS!!!!
 * **home_path** : Defines the base directory of the saving space. By default is set to be the start of the directory that the scripts are saved on. This is the same in all helper scripts.
