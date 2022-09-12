@@ -115,7 +115,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--nlp_model", default='bert',choices=["bert","roberta","albert","distilibert","electra"])
     parser.add_argument("--sequence_lengths",default="4",help='length of context to provide to NLP model (default: 1)')
-    parser.add_argument("--output_dir",default="",help='directory to save extracted representations to')
+    parser.add_argument("--starting_point",default="",help='From which layer to start evaluating subjec by subject',type=int)
     parser.add_argument("--home_path", default=os.getcwd())
     parser.add_argument("--feature_strategy", default="normal",choices=["normal","padding_all","padding_everything","padding_fixations","removing_fixations"])
     parser.add_argument("--method", default="plain",choices=["plain","kernel_ridge","kernel_ridge_svd","svd","ridge_sk"])
@@ -126,7 +126,7 @@ if __name__ == '__main__':
        home_path = os.getcwd().replace("\\","/")
     lengths = args.sequence_lengths.split(",")
     for length in lengths:
-        starting_point = 0
+        starting_point = args.starting_point
         for layer in range(starting_point,13):
 
             f = open(home_path+"/scripts/{}/evaluations/{}/{}/{}/{}/evaluation_script.sh".format(args.nlp_model,args.feature_strategy,args.method,length,layer), "r")
