@@ -29,11 +29,11 @@ The data must be placed on the data directory in order for the code to run.
 
 You can use the 4 helper scripts to construct the saving space for your data and create bash scripts to run the commands for all 3 phases of the experiment.
 ### Creating the save space
-Using the script create_saving_space.py under helper_utils can help you create the save space for all your experiments.
+Using the script create_saving_space.py under helper_utils can help you create the save space for all your experiments before running any of the experiments.
 
 It creates all the folders for all the available models mentioned in the paper. The only parameter needs to specified is the --sequence_length parameter.
 
-However the three scripts for extracting the features, making predictions and evaluating predictions will create the saving space automatically when performing their operation.
+However, the three scripts for extracting the features, making predictions and evaluating predictions will create the saving space automatically when performing their operation.
 
 
 #### Parameters
