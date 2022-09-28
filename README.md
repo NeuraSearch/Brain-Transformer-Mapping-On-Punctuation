@@ -1,6 +1,5 @@
 # Brain-Transformer-Mapping-On-Punctuation
 
-An investigation on different behaviours during entire song listening sessions with regards to the users' session-based skipping activity. The analysis is performed on the [Spotify's Music Streaming Sessions (MSSD)](https://www.aicrowd.com/challenges/spotify-sequential-skip-prediction-challenge) Dataset.
 An investigation on explaining the inner representation of transformer using human brain recordings. Also investigating the role of punctuation on understanding text semantically. 
 The analysis is performed on the [fMRI](https://drive.google.com/drive/folders/1Q6zVCAJtKuLOh-zWpkS3lH8LBvHcEOE8?usp=sharing) data gathered by [Toneva and Wehbe](https://dl.acm.org/doi/abs/10.5555/3454287.3455626) 
 This repository contains the source code for the approach outlined in the Full Paper Role of Punctuation in Semantic Mapping between Brain and Transformer Models, accepted at 2nd Advanced Online & Onsite Course & Symposium on Artificial Intelligence & Neuroscience [ACAIN2022](https://acain2022.artificial-intelligence-sas.org/)).
