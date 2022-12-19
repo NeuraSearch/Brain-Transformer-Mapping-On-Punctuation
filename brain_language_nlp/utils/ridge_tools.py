@@ -216,7 +216,7 @@ def cross_val_ridge(train_features,train_data, n_splits = 10,
         #print('average iteration length {}'.format((time.time()-start_t)/(icv+1)))
     if do_plot:
         plt.figure()
-        plt.imshow(r_cv,aspect='auto',cmap = 'RdBu_r');
+        plt.imshow(r_cv,aspect='auto',cmap = 'RdBu_r')
     #get the best run index (lambda) for every voxel
     argmin_lambda = np.argmin(r_cv,axis = 0)
     weights = np.zeros((train_features.shape[1],train_data.shape[1]))
@@ -226,6 +226,6 @@ def cross_val_ridge(train_features,train_data, n_splits = 10,
         weights[:,idx_vox] = ridge_2(train_features, train_data[:,idx_vox],lambdas[idx_lambda])
     if do_plot:
         plt.figure()
-        plt.imshow(weights,aspect='auto',cmap = 'RdBu_r',vmin = -0.5,vmax = 0.5);
+        plt.imshow(weights,aspect='auto',cmap = 'RdBu_r',vmin = -0.5,vmax = 0.5)
 
     return weights, np.array([lambdas[i] for i in argmin_lambda])
